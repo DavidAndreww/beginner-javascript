@@ -5,11 +5,83 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>New, This, Prototypes and Classes</title>
-  <link rel="stylesheet" href="../base.css">
+  <link rel="stylesheet" href="../base.css" type="html/css">
 </head>
 
 <body>
 
+  <button id="button1">Click Me!</button>
+  <button id="button2">Click Me!</button>
+<script>
+  // THIS KEYWORD
+  
+  // add event listeners to button by using ID
+  button1.addEventListener('click', tellMeAboutTheButton)
+  button2.addEventListener('click', tellMeAboutTheButton)
+
+  // access button by using this keyword
+  // note the differences in scoping between declaration and arrow functions
+  // when a new function is made within another, it's scope is set to the window object
+  function tellMeAboutTheButton(){
+    console.log('outer: ',this)
+    this.textContent = 'DoneClicked!'
+    setTimeout(() => {
+      console.log('innerArrow: ',this)
+    }, 1000);
+    setTimeout(function(){
+      console.log('innerDeclaration: ',this)
+    }, 1000);
+  }
+
+  // OR
+
+  // access button by using event object
+  function tellMeAboutTheButtonEvent(e){
+    console.log(e)
+    e.currentTarget.textContent = 'EVENTS RULE'
+  }
+
+</script>
+<script>
+  // NEW KEYWORD
+
+  // create a new object model which takes in two arguments
+  function Pizza(toppings = [], customer){
+    // sets instances of new Pizza
+    this.toppings = toppings;
+    this.customer = customer;
+    this.slices = 8;
+    // creates methods attached to object model
+    this.itsReady = function(){
+      console.log(`Da pizza is a ready, come and get it ${customer}!`)
+    }
+    this.eatASlice = function(){
+      if (this.slices > 0){
+        this.slices--
+        console.log('Mmmmm, delicious...😋')
+      } else {
+        console.log(`I'm out of 🍕`)
+      }
+    }
+  }
+
+  const pepperoniPizza = new Pizza(['pepperoni'], 'David')
+  pepperoniPizza.itsReady()
+  console.log(pepperoniPizza)
+  const ericsPizza = new Pizza(['cheese', 'onion', 'sausage'], 'Eric')
+  console.log(ericsPizza)
+  ericsPizza.eatASlice()
+  ericsPizza.eatASlice()
+  ericsPizza.eatASlice()
+  ericsPizza.eatASlice()
+  ericsPizza.eatASlice()
+  ericsPizza.eatASlice()
+  ericsPizza.eatASlice()
+  ericsPizza.eatASlice()
+  ericsPizza.eatASlice()
+
+
+</script>
 </body>
 
 </html>

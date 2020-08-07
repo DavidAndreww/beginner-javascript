@@ -11,6 +11,38 @@
 <body>
   <script>
 
+// object literal syntax
+const person = {
+  name: 'David',
+  age: 33,
+  clothing: {
+    shirts: 10,
+    shoes: 2
+  },
+  sayHello (greeting = 'Hola'){
+    console.log(`${greeting}, I'm ${this.name}!`)
+  }
+}
+// you can directly add new values using dot or bracket notation
+// bracked notation allows the key/value to be accessed through a variable dynamically
+console.log(person)
+person.isCool = false;
+person.isCool = true;
+console.log(person)
+person['married'] = false;
+console.log(person)
+delete person.married;
+console.log(person)
+person.sayHello()
+person.sayHello('What\'s good')
+
+// loop over an object
+for (value in person){
+  console.log(value + ': ', person[value])
+}
+
+
+
   </script>
 </body>
 
